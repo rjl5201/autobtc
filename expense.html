@@ -1,0 +1,415 @@
+<h3 class="md-display-3">Applicant Expense Form</h3>
+
+Instructions to Applicant: Complete voucher after conclusion of an employment interview application. Fill in applicable information and submit with originals of transportation ticket stubs, hotel receipts (including prepaid stubs, receipts), etc. to the XXXXX Corporation Human Resources Department.
+
+<!-- <h5 class="md-display-1">Today's Date</h5> -->
+<md-datepicker ng-model="date"></md-datepicker>
+<!-- {{date}} -->
+
+
+
+
+
+<h3 class="md-display-1">Applicant Information</h3>
+
+
+<md-content>
+      <form name="userForm" ng-submit="submit()"> 
+
+<div class="col-md-12">
+
+        
+        <div layout-gt-sm="row">
+        
+          <md-input-container class="md-block" flex-gt-sm="">
+            <label>First Name</label>
+            <input ng-model="application.firstName" required>
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm="">
+            <label>Last Name</label>
+            <input ng-model="application.lastName" required>
+          </md-input-container>
+          
+          <md-input-container class="md-block" flex-gt-sm="">
+            <label>Middle Initial</label>
+            <input ng-model="application.middleInit">
+          </md-input-container>
+        </div>
+
+		
+        <div layout-gt-sm="row">
+        
+
+        <md-input-container class="md-block" flex-gt-sm="">
+          <label>Address</label>
+          <input ng-model="application.address" required>
+        </md-input-container>
+        
+        <md-input-container class="md-block" flex-gt-sm="">
+          <label>Apt. No</label>
+          <input ng-model="application.apt">
+        </md-input-container>
+        
+        </div>
+
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm="">
+            <label>City</label>
+            <input ng-model="application.city" required>
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm="">
+            <label>State</label>
+            <md-select ng-model="application.state"required>
+              <md-option ng-repeat="state in states" value="{{state.abbrev}}">
+                {{state.abbrev}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm="">
+            <label>Postal Code</label>
+            <input name="postalCode" ng-model="application.postalCode" placeholder="12345" required ng-pattern="/^[0-9]{5}$/">
+          </md-input-container>
+        </div>
+        
+       
+        
+        <div class="col-md-6">
+	    <p>Indicate Mode of Transportation:</p>
+	        
+	        <md-radio-group layout="row" ng-model="application.transportMode">
+		        <md-radio-button value=auto required>Personal Auto </md-radio-button>
+		        <md-radio-button value=air>Air</md-radio-button>
+		        <md-radio-button value=other>Other</md-radio-button>
+	        </md-radio-group>
+			
+		</div>
+		<div class="col-md-6">
+		<p>Were transportation arrangements prepaid by XXXXX?:</p>
+	    	<md-checkbox ng-model="application.prepaid">
+	             Yes
+          	</md-checkbox>
+          	<md-checkbox ng-model="application.prepaid" ng-true-value="false" ng-false-value="true">
+	             No
+          	</md-checkbox>
+		</div>
+</div>
+
+		<h3 class="md-display-1">Departure Trip</h3>
+	<div class="col-md-12">
+
+		<div class="col-md-12">
+			<div layout-gt-sm="row">
+	        
+	          <md-input-container class="md-block" flex-gt-sm="">
+	            <label>From</label>
+	            <input ng-model="application.deptFrom" required>
+	          </md-input-container>
+	          
+	           <md-input-container class="md-block" flex-gt-sm="">
+	            <label>Date</label>
+	            <input type="date" ng-model="application.deptDate" required>
+	          </md-input-container>
+	          
+	          <md-input-container class="md-block" flex-gt-sm="">
+	            <label>Time</label>
+	            <input type="time" ng-model="application.deptTime">
+	          </md-input-container>
+	
+	        </div>
+	
+		
+		
+		
+	
+			<div layout-gt-sm="row">
+	        
+	          <md-input-container class="md-block" flex-gt-sm="">
+	            <label>To</label>
+	            <input ng-model="application.deptTo" required>
+	          </md-input-container>
+	          
+	           <md-input-container class="md-block" flex-gt-sm="">
+	            <label>Date</label>
+	            <input type="date" ng-model="application.deptDate2" required>
+	          </md-input-container>
+	          
+	          <md-input-container class="md-block" flex-gt-sm="">
+	            <label>Time</label>
+	            <input type="time" ng-model="application.deptTime2">
+	          </md-input-container>
+	
+	        </div>
+	        
+	        
+	        
+	        <div layout-gt-sm="row">
+	        
+	          
+	          <md-input-container class="md-block" flex-gt-sm="">
+	            <label>Transportation Costs (Other Than Auto) $</label>
+	            <input ng-model="application.miscCost">
+	          </md-input-container>
+	          
+	          
+	          <md-input-container class="md-block" flex-gt-sm="">
+	            <label>Auto Mileage One-Way</label>
+	            <input type="number"  ng-value="calcCost()" ng-model="application.deptMileage">        
+	          </md-input-container>
+	          
+	         
+	          
+	        </div>
+	        
+	        
+	        
+	        
+		</div>
+		
+		
+		
+
+
+
+		
+		
+		<div class="col-md-9">
+<!-- 			<div layout-gt-sm="row">
+	        
+	          <md-input-container class="md-block" flex-gt-sm="">
+	            <label>Auto Mileage One-Way</label>
+	            <input type="number" ng-value="calcDepMiles()" ng-model="deptMileage">        
+	          </md-input-container>
+	        </div> -->
+		</div>
+
+
+		<div class="col-md-3">
+			<div layout-gt-sm="row">
+	          <md-input-container class="md-block" flex-gt-sm="">
+	            <label>Mileage Cost $</label>
+	           		<input type="text" ng-model="application.deptMileCost" disabled/>
+	          </md-input-container>
+	
+	        </div>
+		</div>
+		</div>
+		
+		
+	<h3 class="md-display-1">Lodging</h3>
+<div class="col-md-12">
+
+
+
+<div class="col-md-9">
+			<div layout-gt-sm="row">
+	        
+	          <md-input-container class="md-block" flex-gt-sm="">
+	            <label>Hotel Name</label>
+	            <input ng-model="application.hotel">
+	          </md-input-container>
+	          
+	           <md-input-container class="md-block" flex-gt-sm="">
+	            <label>Number of Nights</label>
+	            <input ng-model="application.nights">
+	          </md-input-container>
+
+	
+	        </div>
+		</div>
+
+<div class="col-md-3">
+			<div layout-gt-sm="row">
+	          <md-input-container class="md-block" flex-gt-sm="">
+	            <label>Hotel Room Cost $</label>
+	           		<input type="text" ng-model="application.hotelCost"/>
+	          </md-input-container>
+	
+	        </div>
+		</div>
+
+
+
+
+
+
+
+
+
+
+</div>	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+<h3 class="md-display-1">Return Trip</h3>
+<div class="col-md-12">
+
+		<div class="col-md-12">
+			<div layout-gt-sm="row">
+	        
+	          <md-input-container class="md-block" flex-gt-sm="">
+	            <label>From</label>
+	            <input ng-model="application.returnFrom" required>
+	          </md-input-container>
+	          
+	           <md-input-container class="md-block" flex-gt-sm="">
+	            <label>Date</label>
+	            <input type="date" ng-model="application.returnDate" required>
+	          </md-input-container>
+	          
+	          <md-input-container class="md-block" flex-gt-sm="">
+	            <label>Time</label>
+	            <input type="time" ng-model="application.returnTime">
+	          </md-input-container>
+	
+	        </div>
+	        
+	        
+	        
+	        
+	        
+
+			<div layout-gt-sm="row">
+	        
+	          <md-input-container class="md-block" flex-gt-sm="">
+	            <label>To</label>
+	            <input ng-model="application.returnTo" required>
+	          </md-input-container>
+	          
+	           <md-input-container class="md-block" flex-gt-sm="">
+	            <label>Date</label>
+	            <input type="date" ng-model="application.returnDate2" required>
+	          </md-input-container>
+	          
+	          <md-input-container class="md-block" flex-gt-sm="">
+	            <label>Time</label>
+	            <input type="time" ng-model="application.returnTime2">
+	          </md-input-container>
+	
+	        </div>
+
+	        
+	        
+	         <div layout-gt-sm="row">
+	        
+	          
+	          <md-input-container class="md-block" flex-gt-sm="">
+	            <label>Transportation Costs (Other Than Auto) $</label>
+	            <input ng-model="application.miscCost2">
+	          </md-input-container>
+	          
+	          
+	          <md-input-container class="md-block" flex-gt-sm="">
+	            <label>Auto Mileage One-Way</label>
+	            <input type="number" ng-model="application.returnMileage">        
+	          </md-input-container>
+	          
+	         
+	          
+	        </div>
+	        
+	        
+	        
+	        
+	        
+		</div>
+		
+		
+		
+		
+
+		
+		
+		<div class="col-md-9">
+<!-- 			<div layout-gt-sm="row">
+	        
+	          <md-input-container class="md-block" flex-gt-sm="">
+	            <label>Auto Mileage One-Way</label>
+	            <input type="number" ng-value="calcDepMiles()" ng-model="returnMileage">        
+	          </md-input-container>
+	        </div> -->
+		</div>
+
+
+		<div class="col-md-3">
+			<div layout-gt-sm="row">
+	          <md-input-container class="md-block" flex-gt-sm="">
+	            <label>Mileage Cost $</label>
+	           		<input type="text" ng-model="application.returnMileCost" disabled/>
+	          </md-input-container>
+	
+	        </div>
+		</div>
+		</div>
+		
+		
+		
+		<h3 class="md-display-1">Misc Expenses</h3>
+
+		<div class="col-md-12">
+			<div layout-gt-sm="row"  ng-repeat="misc in application.miscExpenses">
+	        
+	          <md-input-container class="md-block" flex-gt-sm="">
+	            <label>Expense</label>
+	            <input ng-model="misc.name">
+	          </md-input-container>
+	          
+	          <md-input-container class="md-block" flex-gt-sm="">
+	            <label>Expense Cost $</label>
+	            <input type="number" ng-model="misc.cost">
+	          </md-input-container>
+
+	
+	        </div>
+
+	       
+	       
+	       
+	       <md-button class="md-raised md-primary" ng-click="addfield()">Add Expense</md-button>
+	       
+	        
+
+		</div>
+		
+		<div class="col-md-9">
+<!-- 			<div layout-gt-sm="row">
+	        
+	          <md-input-container class="md-block" flex-gt-sm="">
+	            <label>Auto Mileage One-Way</label>
+	            <input type="number" ng-value="calcDepMiles()" ng-model="returnMileage">        
+	          </md-input-container>
+	        </div> -->
+		</div>
+
+
+		<div class="col-md-3">
+			<div layout-gt-sm="row">
+	          <md-input-container class="md-block" flex-gt-sm="">
+	            <label>Total Misc Cost $</label>
+	           		<input type="text" ng-value="calculateSum()" ng-model="application.totalMiscCost" disabled/>
+	          </md-input-container>
+	
+	        </div>
+		</div>
+		
+		
+		<div class="col-md-9">
+<h3>Total: ${{application.total}}</h3>
+		</div>
+		
+		<div class="col-md-3">
+		
+		<md-button type='submit' class="md-raised md-primary">Submit</md-button>
+		</div>
+      </form>
+      
+      
+  </md-content>

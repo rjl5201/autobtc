@@ -1,0 +1,90 @@
+<div class="col-md-12 col-md-offset-2">
+	<img style="vertical-align:middle" ng-src="https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png" width="100" height="100">
+	<span class="md-display-3">Angular & Firebase Demo</span>
+</div>
+
+
+
+
+
+
+
+
+
+
+ <div class="col-md-3" ng-if="addFormShow">
+ 	<h3>Add Application</h3>
+	<!-- <md-input-container class="md-block" flex-gt-sm="">
+		<label>First Name</label> <input ng-model="application.firstName">
+	</md-input-container>
+	<md-input-container class="md-block" flex-gt-sm="">
+		<label>Last Name</label> <input ng-model="application.lastName">
+	</md-input-container>
+		<md-input-container class="md-block" flex-gt-sm="">
+		<label>Total Owed</label> <input type="text" ng-model="application.total">
+	</md-input-container>
+	
+	<div ng-if="application">Your name will be entered as: {{application.firstName}} {{application.lastName}}</div> -->
+	
+	<md-button class="md-raised md-primary" ng-click="addApplication()">Add</md-button>
+</div>
+
+<div class="col-md-3" ng-if="editFormShow">
+	<h3>Edit Application</h3>
+	<md-input-container class="md-block" flex-gt-sm="">
+		<label>First Name</label> <input ng-model="application.firstName">
+	</md-input-container>
+	<md-input-container class="md-block" flex-gt-sm="">
+		<label>Last Name</label> <input ng-model="application.lastName">
+	</md-input-container>
+	<md-input-container class="md-block" flex-gt-sm="">
+		<label>Address</label> <input ng-model="application.address">
+	</md-input-container>
+	<md-input-container class="md-block" flex-gt-sm="">
+		<label>City</label> <input ng-model="application.city">
+	</md-input-container>
+	<md-input-container class="md-block" flex-gt-sm="">
+    	<label>State</label>
+        	<md-select ng-model="application.state">
+            	<md-option ng-repeat="state in states" value="{{state.abbrev}}">
+                {{state.abbrev}}
+            	</md-option>
+            </md-select>
+    </md-input-container>
+	<md-input-container class="md-block" flex-gt-sm="">
+		<label>Total Owed</label> <input ng-model="application.total">
+	</md-input-container>
+	
+	<md-button class="md-raised md-primary" ng-click="editApplication()">Save</md-button>
+</div>
+
+<div class="col-md-9">
+	<h3>Database Data</h3>
+	<table class="table table-striped text-centered">
+		<thead>
+			<tr>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Address</th>
+				<th>City</th>
+				<th>State</th>
+				<th>Total Owed</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="application in applications">
+				<td>{{application.firstName}}</td>
+				<td>{{application.lastName}}</td>
+				<td>{{application.address}}</td>
+				<td>{{application.city}}</td>
+				<td>{{application.state}}</td>
+				<td>{{application.total}}</td>
+				<td>
+					<md-button class="md-raised md-primary" ng-click="showEditForm(application)">Edit</md-button>
+					<md-button class="md-raised md-warn" ng-click="removeApplication(application)">Delete</md-button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

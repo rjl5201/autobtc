@@ -1,0 +1,87 @@
+<h3 class="md-display-3">Automatic Bitcoin Excellence</h3>
+
+<md-content>
+    <form name="userForm" ng-submit="submit()">
+
+        <div class="col-md-12">
+            <h3>Your Wallet Data</h3>
+
+            <div layout-gt-sm="row">
+
+                <md-input-container class="md-block" flex-gt-sm="">
+                    <label>First Name</label>
+                    <input ng-model="wallet.firstName" required>
+                </md-input-container>
+
+                <md-input-container class="md-block" flex-gt-sm="">
+                    <label>Last Name</label>
+                    <input ng-model="application.lastName" required>
+                </md-input-container>
+
+                <md-input-container class="md-block" flex-gt-sm="">
+                    <label>Middle Initial</label>
+                    <input ng-model="application.middleInit">
+                </md-input-container>
+            </div>
+
+
+            <div layout-gt-sm="row">
+
+                <md-input-container class="md-block" flex-gt-sm="">
+                    <label>Address</label>
+                    <input ng-model="application.address" required>
+                </md-input-container>
+
+                <md-input-container class="md-block" flex-gt-sm="">
+                    <label>Apt. No</label>
+                    <input ng-model="application.apt">
+                </md-input-container>
+
+            </div>
+
+            <div layout-gt-sm="row">
+                <md-input-container class="md-block" flex-gt-sm="">
+                    <label>City</label>
+                    <input ng-model="application.city" required>
+                </md-input-container>
+
+                <md-input-container class="md-block" flex-gt-sm="">
+                    <label>State</label>
+                    <md-select ng-model="application.state" required>
+                        <md-option ng-repeat="state in states" value="{{state.abbrev}}">
+                            {{state.abbrev}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+
+                <md-input-container class="md-block" flex-gt-sm="">
+                    <label>Postal Code</label>
+                    <input name="postalCode" ng-model="application.postalCode" placeholder="12345" required
+                           ng-pattern="/^[0-9]{5}$/">
+                </md-input-container>
+            </div>
+        </div>
+    </form>
+
+    <div class="col-md-12">
+        <h3>Gemini JSON Data</h3>
+        <table class="table table-striped text-centered">
+            <thead>
+            <tr>
+                <th>Bid</th>
+                <th>Ask</th>
+                <th>Last</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr >
+                <td>{{btcPrice.bid}}</td>
+                <td>{{btcPrice.ask}}</td>
+                <td>{{btcPrice.last}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</md-content>
